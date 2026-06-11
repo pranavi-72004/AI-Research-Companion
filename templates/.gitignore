@@ -1,5 +1,4 @@
-venv/
-uploads/
 .env
+venv/
 __pycache__/
-*.pyc
+uploads/
