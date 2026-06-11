@@ -1,8 +1,8 @@
 import numpy as np
 import os
-import google.generativeai as genai
+from google import genai
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def create_chunks(text):
     chunk_size = 500
@@ -12,11 +12,11 @@ def create_chunks(text):
     return chunks
 
 def get_embedding(text):
-    result = genai.embed_content(
-        model="models/text-embedding-004",  # ✅ Fixed model name
-        content=text
+    result = client.models.embed_content(
+        model="gemini-embedding-exp-03-07",
+        contents=text
     )
-    return np.array(result["embedding"])
+    return np.array(result.embeddings[0].values)
 
 def build_vector_store(text):
     chunks = create_chunks(text)
