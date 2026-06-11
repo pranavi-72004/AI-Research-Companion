@@ -5,7 +5,7 @@ An AI-powered web application that helps users quickly search, understand, and s
 ---
 
 ## 🚀 Live Demo
-🔗 https://your-deployment-link.onrender.com
+🔗 [https://ai-research-companion-otqy.onrender.com]
 
 ---
 
