@@ -71,7 +71,17 @@ source venv/bin/activate  # Mac/Linux
 pip install -r requirements.txt
 ```
 
-### 5. Run the app
+### 5. Set up Environment Variables
+
+Create a `.env` file in the root folder:
+```
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+```
+
+> 🔑 Get your Gemini API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
+
+
+### 6. Run the app
 ```bash
 python app.py
 ```
@@ -96,9 +106,9 @@ http://127.0.0.1:5000
 ## 👩‍💻 Author
 
 **Pranavi S**
+Computer Science & Engineering Student
 
 ---
 
 ## 📜 License
-
-This project is licensed under the MIT License - feel free to use and modify it.
+This project is licensed under the MIT License - feel free to use and modify it with credits
