@@ -1,21 +1,27 @@
-# 📚 AI Research Paper Assistant
+# 🧠 AI RESEARCH COMAPNION
 
-An AI-powered web application that helps users quickly search, understand, and summarize research papers in a simple and user-friendly way.
+AI Research Companion is an AI-powered web application that simplifies research paper analysis by transforming complex academic papers into actionable insights.
+
+The platform enables users to upload research papers and instantly generate summaries, project ideas, implementation roadmaps, research gap analysis, literature reviews, citations, and interactive question-answering. It combines Google Gemini AI with Retrieval-Augmented Generation (RAG) techniques to provide context-aware responses directly from uploaded documents.
+
+Designed for students, researchers, and developers, ResearchMind AI reduces the time required to understand and extract valuable information from research publications.
 
 ---
 
 ## 🚀 Live Demo
-🔗 [https://ai-research-companion-otqy.onrender.com]
+🔗 https://ai-research-companion-otqy.onrender.com
 
 ---
 
 ## 📌 Features
 
-- 🔍 Search research papers easily
-- 🧠 AI-based summarization of content
-- 📄 Clean and simple UI for reading papers
-- ⚡ Fast responses using API integration
-- 🌐 Web-based interface (no installation needed)
+- 📄 Generate research paper summaries
+- 💡 Generate project ideas from research papers
+- 🗺️ Create implementation roadmaps
+- 🔍 Identify research gaps
+- 📚 Generate literature reviews
+- 📝 Generate citations (APA, IEEE, MLA)
+- 💬 Chat with uploaded research papers using RAG
 
 ---
 
@@ -23,9 +29,9 @@ An AI-powered web application that helps users quickly search, understand, and s
 
 - Python 🐍
 - Flask 🌐
+- Google Gemini API 🤖
+- PyPDF2 📄
 - HTML, CSS, JavaScript 🎨
-- REST APIs (for AI integration)
-- Gunicorn (deployment server)
 
 ---
 
@@ -35,14 +41,21 @@ An AI-powered web application that helps users quickly search, understand, and s
 AI-Research-Companion/
 │
 ├── app.py
+├── summarizer.py
+├── chat_paper.py
+├── rag.py
+├── pdf_processor.py
 ├── requirements.txt
 ├── Procfile
-├── templates/
-│   └── index.html
+│
 ├── static/
 │   ├── style.css
 │   └── script.js
-└── README.md
+│
+├── templates/
+│   └── index.html
+│
+└── uploads/
 ```
 
 ---
@@ -55,15 +68,15 @@ git clone https://github.com/your-username/AI-Research-Companion.git
 cd AI-Research-Companion
 ```
 
-### 2. Create virtual environment
+### 2. Create a virtual environment
 ```bash
 python -m venv venv
 ```
 
-### 3. Activate environment
+### 3. Activate the environment
 ```bash
-venv\Scripts\activate    # Windows
-source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate   # Windows
+source venv/bin/activate # Mac/Linux
 ```
 
 ### 4. Install dependencies
@@ -78,10 +91,10 @@ Create a `.env` file in the root folder:
 GEMINI_API_KEY=your_actual_gemini_api_key_here
 ```
 
-> 🔑 Get your Gemini API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
+> 🔑 Get your Gemini API key from [Google AI Studio](https://aistudio.google.com/app/apikey)  
 
 
-### 6. Run the app
+### 6. Run the application
 ```bash
 python app.py
 ```
@@ -93,21 +106,12 @@ http://127.0.0.1:5000
 
 ---
 
-## 📈 Future Improvements
-
-- 📊 Add research paper recommendation system
-- 🤖 Improve AI summarization accuracy
-- 💬 Add chatbot-style interface
-- 🌙 Dark mode UI
-- 📱 Mobile responsive design
-
----
-
 ## 👩‍💻 Author
 
-**Pranavi S**
+**Pranavi S**  
 
 ---
 
 ## 📜 License
-This project is licensed under the MIT License - feel free to use and modify it with credits
+
+This project is licensed under the MIT License - feel free to use and modify it with credits.
