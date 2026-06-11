@@ -17,107 +17,140 @@ def analyze_paper(text, feature):
     print("FEATURE RECEIVED IN GEMINI:", feature)
     print("=" * 50)
 
+    formatting_rule = """
+    IMPORTANT:
+
+    Return the response in CLEAN HTML format.
+
+    Use:
+    <h2> for headings
+    <h3> for subheadings
+    <p> for paragraphs
+    <ul><li> for lists
+
+    DO NOT use:
+    *
+    **
+    #
+    ##
+    ---
+    Markdown tables
+
+    Make the response professional and easy to read.
+    """
+
     prompts = {
 
         "summary": f"""
+        {formatting_rule}
+
         Summarize this research paper.
 
-        Provide:
-        1. Overview
-        2. Key Findings
-        3. Conclusion
+        Include:
+
+        Overview
+        Key Findings
+        Conclusion
 
         Paper:
         {text[:15000]}
         """,
 
         "ideas": f"""
+        {formatting_rule}
+
         You are an AI innovation expert.
 
-        Based on this research paper, generate 5 UNIQUE project ideas.
+        Generate 5 UNIQUE project ideas.
 
-        For each project provide:
+        For each project include:
 
-        Project Name:
-        Problem Solved:
-        Features:
-        Tech Stack:
-        Difficulty:
+        Project Name
+        Problem Solved
+        Key Features
+        Tech Stack
+        Difficulty Level
 
         Paper:
         {text[:15000]}
         """,
 
         "roadmap": f"""
-        Create a COMPLETE implementation roadmap.
+        {formatting_rule}
+
+        Create a complete implementation roadmap.
 
         Include:
 
-        1. Project Goal
-        2. Dataset Required
-        3. Libraries Required
-        4. Development Steps
-        5. Testing Phase
-        6. Deployment Phase
+        Project Goal
+        Dataset Required
+        Libraries Required
+        Development Steps
+        Testing Phase
+        Deployment Phase
 
         Paper:
         {text[:15000]}
         """,
 
         "gap": f"""
+        {formatting_rule}
+
         Act as a research professor.
 
         Analyze this paper and provide:
 
-        1. Research Gaps
-        2. Existing Limitations
-        3. Future Scope
-        4. Suggested Improvements
+        Research Gaps
+        Existing Limitations
+        Future Scope
+        Suggested Improvements
 
         Paper:
         {text[:15000]}
         """,
 
         "chat": f"""
+        {formatting_rule}
+
         Explain this paper like I am a final year engineering student.
 
         Include:
 
-        - What problem is being solved?
-        - How does the solution work?
-        - Why is it important?
-        - Real-world applications
+        What problem is being solved
+        How the solution works
+        Why it is important
+        Real-world applications
 
         Paper:
         {text[:15000]}
         """,
 
         "review": f"""
-        Generate a proper literature review.
+        {formatting_rule}
+
+        Generate a professional literature review.
 
         Include:
 
-        - Objective
-        - Methodology
-        - Results
-        - Strengths
-        - Weaknesses
-        - Conclusion
+        Objective
+        Methodology
+        Results
+        Strengths
+        Weaknesses
+        Conclusion
 
         Paper:
         {text[:15000]}
         """,
 
         "citation": f"""
+        {formatting_rule}
+
         Generate citations in:
 
         IEEE Format
-
         APA Format
-
         MLA Format
-
-        Based on the paper content below:
 
         Paper:
         {text[:15000]}
