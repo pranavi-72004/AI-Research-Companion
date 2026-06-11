@@ -1,9 +1,3 @@
-import numpy as np
-import os
-from google import genai
-
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-
 def create_chunks(text):
     chunk_size = 500
     chunks = []
@@ -11,26 +5,17 @@ def create_chunks(text):
         chunks.append(text[i:i+chunk_size])
     return chunks
 
-def get_embedding(text):
-    result = client.models.embed_content(
-        model="text-embedding-004",
-        contents=text
-    )
-    return np.array(result.embeddings[0].values)
-
 def build_vector_store(text):
     chunks = create_chunks(text)
-    embeddings = [get_embedding(chunk) for chunk in chunks]
-    return np.array(embeddings), chunks
+    return None, chunks
 
 def search_chunks(question, index, chunks):
-    question_embedding = get_embedding(question)
-    similarities = []
-    for emb in index:
-        score = np.dot(question_embedding, emb) / (
-            np.linalg.norm(question_embedding) * np.linalg.norm(emb)
-        )
-        similarities.append(score)
-    top_indices = np.argsort(similarities)[-3:][::-1]
-    relevant_chunks = [chunks[i] for i in top_indices]
-    return "\n".join(relevant_chunks)
+    question_words = question.lower().split()
+    scored_chunks = []
+    for chunk in chunks:
+        chunk_lower = chunk.lower()
+        score = sum(1 for word in question_words if word in chunk_lower)
+        scored_chunks.append((score, chunk))
+    scored_chunks.sort(reverse=True)
+    top_chunks = [chunk for _, chunk in scored_chunks[:3]]
+    return "\n".join(top_chunks)

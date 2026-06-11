@@ -5,6 +5,7 @@ from rag import build_vector_store, search_chunks
 from chat_paper import answer_question
 import os
 
+
 app = Flask(__name__)
 
 # Store paper data globally
@@ -30,50 +31,34 @@ def home():
 
 @app.route("/upload", methods=["POST"])
 def upload():
-
-    global paper_index
-    global paper_chunks
+    global paper_index, paper_chunks
 
     file = request.files["pdf"]
-
-    feature = request.form.get(
-        "feature",
-        "summary"
-    )
+    feature = request.form.get("feature", "summary")
 
     print("=" * 50)
     print("Selected Feature:", feature)
     print("=" * 50)
 
-    path = os.path.join(
-        app.config["UPLOAD_FOLDER"],
-        file.filename
-    )
-
+    path = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
     file.save(path)
 
     text = extract_text(path)
 
-    # Build FAISS database
-    paper_index, paper_chunks = build_vector_store(text)
+    # ✅ Only build vector store for chat feature
+    if feature == "chat":
+        paper_index, paper_chunks = build_vector_store(text)
 
-    # Existing features
     global latest_result
-
-    result = analyze_paper(
-        text,
-         feature
-         )
-
+    result = analyze_paper(text, feature)
     latest_result = result
 
     return render_template(
-    "index.html",
-    summary=latest_result,
-    answer=None,
-    scroll=True
-)
-
+        "index.html",
+        summary=latest_result,
+        answer=None,
+        scroll=True
+    )
 @app.route("/ask", methods=["POST"])
 def ask():
 
