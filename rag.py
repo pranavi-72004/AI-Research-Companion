@@ -13,7 +13,7 @@ def create_chunks(text):
 
 def get_embedding(text):
     result = genai.embed_content(
-        model="models/embedding-001",
+        model="models/text-embedding-004",  # ✅ Fixed model name
         content=text
     )
     return np.array(result["embedding"])
@@ -25,17 +25,12 @@ def build_vector_store(text):
 
 def search_chunks(question, index, chunks):
     question_embedding = get_embedding(question)
-
-    # Calculate similarity scores
     similarities = []
     for emb in index:
         score = np.dot(question_embedding, emb) / (
             np.linalg.norm(question_embedding) * np.linalg.norm(emb)
         )
         similarities.append(score)
-
-    # Get top 3 most relevant chunks
     top_indices = np.argsort(similarities)[-3:][::-1]
     relevant_chunks = [chunks[i] for i in top_indices]
-
     return "\n".join(relevant_chunks)
