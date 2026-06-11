@@ -13,7 +13,7 @@ def create_chunks(text):
 
 def get_embedding(text):
     result = client.models.embed_content(
-        model="gemini-embedding-exp-03-07",
+        model="text-embedding-004",
         contents=text
     )
     return np.array(result.embeddings[0].values)
